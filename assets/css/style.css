@@ -138,13 +138,15 @@ img {
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 12px;
-  font-size: 13px;
+  gap: 14px;
+  font-size: 20px !important;
 }
 
 .header-account a {
   color: var(--color-primary);
+  font-size: 20px !important;
   font-weight: bold;
+  text-decoration: none;
 }
 
 .header-account a:hover {

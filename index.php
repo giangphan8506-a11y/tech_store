@@ -1,4 +1,3 @@
-
 <?php
     require_once __DIR__ . '/config/database.php';
 
@@ -47,22 +46,19 @@
 
     <div class="row g-3">
         <?php foreach ($danhSachDanhMuc as $danhMuc) { ?>
-            <div class="col-6 col-md-3">
-                <a
-                    href="products.php?danh_muc=<?php echo (int) $danhMuc['MaDanhMuc']; ?>"
-                    class="category-card"
-                >
-                    <h3>
-                        <?php echo htmlspecialchars($danhMuc['TenDanhMuc']); ?>
-                    </h3>
+        <div class="col-6 col-md-3">
+            <a href="products.php?danh_muc=<?php echo (int) $danhMuc['MaDanhMuc']; ?>" class="category-card">
+                <h3>
+                    <?php echo htmlspecialchars($danhMuc['TenDanhMuc']); ?>
+                </h3>
 
-                    <p>
-                        <?php echo htmlspecialchars($danhMuc['MoTa'] ?? ''); ?>
-                    </p>
+                <p>
+                    <?php echo htmlspecialchars($danhMuc['MoTa'] ?? ''); ?>
+                </p>
 
-                    <span>Xem sản phẩm →</span>
-                </a>
-            </div>
+                <span>Xem sản phẩm →</span>
+            </a>
+        </div>
         <?php } ?>
     </div>
 </section>
@@ -80,61 +76,55 @@
     <div class="row g-3">
         <?php if (count($danhSachSanPham) > 0) { ?>
 
-            <?php foreach ($danhSachSanPham as $sanPham) { ?>
-                <div class="col-6 col-md-4 col-lg-3">
-                    <div class="product-card">
+        <?php foreach ($danhSachSanPham as $sanPham) { ?>
+        <div class="col-6 col-md-4 col-lg-3">
+            <div class="product-card">
 
-                        <a href="product-detail.php?id=<?php echo (int) $sanPham['MaSanPham']; ?>">
-                            <?php if (!empty($sanPham['HinhAnh'])) { ?>
-                                <img
-                                    src="assets/images/<?php echo rawurlencode(basename($sanPham['HinhAnh'])); ?>"
-                                    alt="<?php echo htmlspecialchars($sanPham['TenSanPham']); ?>"
-                                    loading="lazy"
-                                >
-                            <?php } else { ?>
-                                <div class="product-image-placeholder">
-                                    Chưa có hình ảnh
-                                </div>
-                            <?php } ?>
-                        </a>
-
-                        <div class="product-info">
-                            <p class="product-category">
-                                <?php echo htmlspecialchars($sanPham['TenDanhMuc'] ?? 'Chưa phân loại'); ?>
-                            </p>
-
-                            <h3>
-                                <a href="product-detail.php?id=<?php echo (int) $sanPham['MaSanPham']; ?>">
-                                    <?php echo htmlspecialchars($sanPham['TenSanPham']); ?>
-                                </a>
-                            </h3>
-
-                            <p class="product-price">
-                                <?php echo number_format((float) $sanPham['DonGia'], 0, ',', '.'); ?>đ
-                            </p>
-
-                            <?php if ((int) $sanPham['SoLuongTon'] > 0) { ?>
-                                <a
-                                    href="product-detail.php?id=<?php echo (int) $sanPham['MaSanPham']; ?>"
-                                    class="btn-buy"
-                                >
-                                    Mua ngay
-                                </a>
-                            <?php } else { ?>
-                                <button class="btn-buy" disabled>
-                                    Hết hàng
-                                </button>
-                            <?php } ?>
-                        </div>
-
+                <a href="product-detail.php?id=<?php echo (int) $sanPham['MaSanPham']; ?>">
+                    <?php if (!empty($sanPham['HinhAnh'])) { ?>
+                    <img src="/tech_store/assets/images/products/<?php echo rawurlencode(basename($sanPham['HinhAnh'])); ?>"
+                        alt="<?php echo htmlspecialchars($sanPham['TenSanPham']); ?>">
+                    <?php } else { ?>
+                    <div class="product-image-placeholder">
+                        Chưa có hình ảnh
                     </div>
+                    <?php } ?>
+                </a>
+
+                <div class="product-info">
+                    <p class="product-category">
+                        <?php echo htmlspecialchars($sanPham['TenDanhMuc'] ?? 'Chưa phân loại'); ?>
+                    </p>
+
+                    <h3>
+                        <a href="product-detail.php?id=<?php echo (int) $sanPham['MaSanPham']; ?>">
+                            <?php echo htmlspecialchars($sanPham['TenSanPham']); ?>
+                        </a>
+                    </h3>
+
+                    <p class="product-price">
+                        <?php echo number_format((float) $sanPham['DonGia'], 0, ',', '.'); ?>đ
+                    </p>
+
+                    <?php if ((int) $sanPham['SoLuongTon'] > 0) { ?>
+                    <a href="product-detail.php?id=<?php echo (int) $sanPham['MaSanPham']; ?>" class="btn-buy">
+                        Mua ngay
+                    </a>
+                    <?php } else { ?>
+                    <button class="btn-buy" disabled>
+                        Hết hàng
+                    </button>
+                    <?php } ?>
                 </div>
-            <?php } ?>
+
+            </div>
+        </div>
+        <?php } ?>
 
         <?php } else { ?>
-            <div class="col-12">
-                <p>Hiện chưa có sản phẩm nào.</p>
-            </div>
+        <div class="col-12">
+            <p>Hiện chưa có sản phẩm nào.</p>
+        </div>
         <?php } ?>
     </div>
 </section>

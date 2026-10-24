@@ -1,4 +1,3 @@
-
 <?php
     require_once __DIR__ . '/config/database.php';
 
@@ -112,9 +111,9 @@
             </a>
 
             <?php foreach ($danhSachDanhMuc as $danhMuc) { ?>
-                <a href="products.php?danh_muc=<?php echo (int) $danhMuc['MaDanhMuc']; ?>">
-                    <?php echo htmlspecialchars($danhMuc['TenDanhMuc']); ?>
-                </a>
+            <a href="products.php?danh_muc=<?php echo (int) $danhMuc['MaDanhMuc']; ?>">
+                <?php echo htmlspecialchars($danhMuc['TenDanhMuc']); ?>
+            </a>
             <?php } ?>
         </div>
     </aside>
@@ -128,19 +127,11 @@
 
         <!-- FORM TIM KIEM -->
         <form action="products.php" method="GET" class="product-search-form">
-            <input
-                type="text"
-                name="q"
-                placeholder="Nhập tên sản phẩm cần tìm..."
-                value="<?php echo htmlspecialchars($tuKhoa); ?>"
-            >
+            <input type="text" name="q" placeholder="Nhập tên sản phẩm cần tìm..."
+                value="<?php echo htmlspecialchars($tuKhoa); ?>">
 
             <?php if ($maDanhMuc !== null) { ?>
-                <input
-                    type="hidden"
-                    name="danh_muc"
-                    value="<?php echo $maDanhMuc; ?>"
-                >
+            <input type="hidden" name="danh_muc" value="<?php echo $maDanhMuc; ?>">
             <?php } ?>
 
             <button type="submit">Tìm kiếm</button>
@@ -154,77 +145,71 @@
 
             <?php if (count($danhSachSanPham) > 0) { ?>
 
-                <?php foreach ($danhSachSanPham as $sanPham) { ?>
-                    <div class="col-6 col-lg-4">
-                        <div class="product-card">
+            <?php foreach ($danhSachSanPham as $sanPham) { ?>
+            <div class="col-6 col-lg-4">
+                <div class="product-card">
 
-                            <a href="product-detail.php?id=<?php echo (int) $sanPham['MaSanPham']; ?>">
-                                <?php if (!empty($sanPham['HinhAnh'])) { ?>
-                                    <img
-                                        src="assets/images/<?php echo rawurlencode(basename($sanPham['HinhAnh'])); ?>"
-                                        alt="<?php echo htmlspecialchars($sanPham['TenSanPham']); ?>"
-                                        loading="lazy"
-                                    >
-                                <?php } else { ?>
-                                    <div class="product-image-placeholder">
-                                        Chưa có hình ảnh
-                                    </div>
-                                <?php } ?>
-                            </a>
-
-                            <div class="product-info">
-
-                                <p class="product-category">
-                                    <?php echo htmlspecialchars($sanPham['TenDanhMuc'] ?? 'Chưa phân loại'); ?>
-                                </p>
-
-                                <h3>
-                                    <a href="product-detail.php?id=<?php echo (int) $sanPham['MaSanPham']; ?>">
-                                        <?php echo htmlspecialchars($sanPham['TenSanPham']); ?>
-                                    </a>
-                                </h3>
-
-                                <p class="product-price">
-                                    <?php echo number_format((float) $sanPham['DonGia'], 0, ',', '.'); ?>đ
-                                </p>
-
-                                <?php if ((int) $sanPham['SoLuongTon'] > 0) { ?>
-                                    <a
-                                        href="product-detail.php?id=<?php echo (int) $sanPham['MaSanPham']; ?>"
-                                        class="btn-buy"
-                                    >
-                                        Mua ngay
-                                    </a>
-                                <?php } else { ?>
-                                    <button class="btn-buy" disabled>
-                                        Hết hàng
-                                    </button>
-                                <?php } ?>
-
-                            </div>
+                    <a href="product-detail.php?id=<?php echo (int) $sanPham['MaSanPham']; ?>">
+                        <?php if (!empty($sanPham['HinhAnh'])) { ?>
+                        <img src="/tech_store/assets/images/products/<?php echo rawurlencode(basename($sanPham['HinhAnh'])); ?>"
+                            alt="<?php echo htmlspecialchars($sanPham['TenSanPham']); ?>">
+                        <?php } else { ?>
+                        <div class="product-image-placeholder">
+                            Chưa có hình ảnh
                         </div>
-                    </div>
-                <?php } ?>
+                        <?php } ?>
+                    </a>
 
-            <?php } else { ?>
-                <div class="col-12">
-                    <div class="empty-products">
-                        <h3>Không tìm thấy sản phẩm</h3>
-                        <p>Thử nhập từ khóa khác hoặc chọn danh mục khác nhé.</p>
-                        <a href="products.php" class="btn-primary">
-                            Xem tất cả sản phẩm
+                    <div class="product-info">
+
+                        <p class="product-category">
+                            <?php echo htmlspecialchars($sanPham['TenDanhMuc'] ?? 'Chưa phân loại'); ?>
+                        </p>
+
+                        <h3>
+                            <a href="product-detail.php?id=<?php echo (int) $sanPham['MaSanPham']; ?>">
+                                <?php echo htmlspecialchars($sanPham['TenSanPham']); ?>
+                            </a>
+                        </h3>
+
+                        <p class="product-price">
+                            <?php echo number_format((float) $sanPham['DonGia'], 0, ',', '.'); ?>đ
+                        </p>
+
+                        <?php if ((int) $sanPham['SoLuongTon'] > 0) { ?>
+                        <a href="product-detail.php?id=<?php echo (int) $sanPham['MaSanPham']; ?>" class="btn-buy">
+                            Mua ngay
                         </a>
+                        <?php } else { ?>
+                        <button class="btn-buy" disabled>
+                            Hết hàng
+                        </button>
+                        <?php } ?>
+
                     </div>
                 </div>
+            </div>
+            <?php } ?>
+
+            <?php } else { ?>
+            <div class="col-12">
+                <div class="empty-products">
+                    <h3>Không tìm thấy sản phẩm</h3>
+                    <p>Thử nhập từ khóa khác hoặc chọn danh mục khác nhé.</p>
+                    <a href="products.php" class="btn-primary">
+                        Xem tất cả sản phẩm
+                    </a>
+                </div>
+            </div>
             <?php } ?>
 
         </div>
 
         <!-- PHAN TRANG -->
         <?php if ($tongTrang > 1) { ?>
-            <nav class="pagination-container" aria-label="Phân trang">
-                <?php for ($i = 1; $i <= $tongTrang; $i++) { ?>
-                    <?php
+        <nav class="pagination-container" aria-label="Phân trang">
+            <?php for ($i = 1; $i <= $tongTrang; $i++) { ?>
+            <?php
                         $thamSoTrang = [];
 
                         if ($tuKhoa !== '') {
@@ -240,14 +225,12 @@
                         $urlTrang = 'products.php?' . http_build_query($thamSoTrang);
                     ?>
 
-                    <a
-                        href="<?php echo htmlspecialchars($urlTrang); ?>"
-                        class="<?php echo $i === $trangHienTai ? 'active' : ''; ?>"
-                    >
-                        <?php echo $i; ?>
-                    </a>
-                <?php } ?>
-            </nav>
+            <a href="<?php echo htmlspecialchars($urlTrang); ?>"
+                class="<?php echo $i === $trangHienTai ? 'active' : ''; ?>">
+                <?php echo $i; ?>
+            </a>
+            <?php } ?>
+        </nav>
         <?php } ?>
 
     </section>
