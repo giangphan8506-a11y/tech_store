@@ -1,5 +1,3 @@
-
-
 <?php
     if (session_status() === PHP_SESSION_NONE) {
         session_start();
@@ -238,21 +236,16 @@
 
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Sửa sản phẩm - Tech Store</title>
 
-    <link
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-        rel="stylesheet"
-    >
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <link
-        rel="stylesheet"
-        href="<?php echo $baseUrl; ?>/assets/css/style.css"
-    >
+    <link rel="stylesheet" href="<?php echo $baseUrl; ?>/assets/css/style.css">
 </head>
 
 <body class="admin-create-product-page">
@@ -273,37 +266,27 @@
         <div class="admin-create-card">
 
             <?php if ($loi !== '') { ?>
-                <div class="alert alert-danger" role="alert">
-                    <?php echo htmlspecialchars($loi); ?>
-                </div>
+            <div class="alert alert-danger" role="alert">
+                <?php echo htmlspecialchars($loi); ?>
+            </div>
             <?php } ?>
 
             <?php if ($thanhCong !== '') { ?>
-                <div class="alert alert-success" role="alert">
-                    <?php echo htmlspecialchars($thanhCong); ?>
-                </div>
+            <div class="alert alert-success" role="alert">
+                <?php echo htmlspecialchars($thanhCong); ?>
+            </div>
             <?php } ?>
 
-            <form
-                action="product-edit.php?id=<?php echo (int) $maSanPham; ?>"
-                method="POST"
-                enctype="multipart/form-data"
-            >
+            <form action="product-edit.php?id=<?php echo (int) $maSanPham; ?>" method="POST"
+                enctype="multipart/form-data">
 
                 <div class="mb-3">
                     <label for="ten_san_pham" class="form-label">
                         Tên sản phẩm *
                     </label>
 
-                    <input
-                        type="text"
-                        id="ten_san_pham"
-                        name="ten_san_pham"
-                        class="form-control"
-                        maxlength="255"
-                        value="<?php echo htmlspecialchars($tenSanPham); ?>"
-                        required
-                    >
+                    <input type="text" id="ten_san_pham" name="ten_san_pham" class="form-control" maxlength="255"
+                        value="<?php echo htmlspecialchars($tenSanPham); ?>" required>
                 </div>
 
                 <div class="mb-3">
@@ -311,30 +294,22 @@
                         Danh mục *
                     </label>
 
-                    <select
-                        id="ma_danh_muc"
-                        name="ma_danh_muc"
-                        class="form-select"
-                        required
-                    >
+                    <select id="ma_danh_muc" name="ma_danh_muc" class="form-select" required>
                         <option value="">-- Chọn danh mục --</option>
 
                         <?php foreach ($danhSachDanhMuc as $danhMuc) { ?>
-                            <option
-                                value="<?php echo (int) $danhMuc['MaDanhMuc']; ?>"
-                                <?php
+                        <option value="<?php echo (int) $danhMuc['MaDanhMuc']; ?>" <?php
                                     echo (string) $maDanhMuc ===
                                         (string) $danhMuc['MaDanhMuc']
                                         ? 'selected'
                                         : '';
-                                ?>
-                            >
-                                <?php
+                                ?>>
+                            <?php
                                     echo htmlspecialchars(
                                         $danhMuc['TenDanhMuc']
                                     );
                                 ?>
-                            </option>
+                        </option>
                         <?php } ?>
                     </select>
                 </div>
@@ -344,13 +319,8 @@
                         Mô tả sản phẩm
                     </label>
 
-                    <textarea
-                        id="mo_ta"
-                        name="mo_ta"
-                        class="form-control"
-                        rows="5"
-                        maxlength="10000"
-                    ><?php echo htmlspecialchars($moTa); ?></textarea>
+                    <textarea id="mo_ta" name="mo_ta" class="form-control" rows="5"
+                        maxlength="10000"><?php echo htmlspecialchars($moTa); ?></textarea>
                 </div>
 
                 <div class="row">
@@ -359,16 +329,8 @@
                             Đơn giá (VNĐ) *
                         </label>
 
-                        <input
-                            type="number"
-                            id="don_gia"
-                            name="don_gia"
-                            class="form-control"
-                            min="0"
-                            step="0.01"
-                            value="<?php echo htmlspecialchars((string) $donGia); ?>"
-                            required
-                        >
+                        <input type="number" id="don_gia" name="don_gia" class="form-control" min="0" step="0.01"
+                            value="<?php echo htmlspecialchars((string) $donGia); ?>" required>
                     </div>
 
                     <div class="col-md-6 mb-3">
@@ -376,16 +338,8 @@
                             Số lượng tồn kho *
                         </label>
 
-                        <input
-                            type="number"
-                            id="so_luong_ton"
-                            name="so_luong_ton"
-                            class="form-control"
-                            min="0"
-                            step="1"
-                            value="<?php echo htmlspecialchars((string) $soLuongTon); ?>"
-                            required
-                        >
+                        <input type="number" id="so_luong_ton" name="so_luong_ton" class="form-control" min="0" step="1"
+                            value="<?php echo htmlspecialchars((string) $soLuongTon); ?>" required>
                     </div>
                 </div>
 
@@ -395,33 +349,23 @@
                     </label>
 
                     <?php if ($anhCu !== '') { ?>
-                        <div class="mb-3">
-                            <img
-                                src="<?php
-                                    echo $baseUrl . '/assets/images/'
-                                        . rawurlencode(basename($anhCu));
-                                ?>"
-                                alt="Ảnh sản phẩm hiện tại"
-                                style="width: 140px; height: 140px; object-fit: contain; border: 1px solid #ddd; border-radius: 8px; padding: 8px;"
-                            >
-                        </div>
+                    <div class="mb-3">
+                        <img src="../assets/images/products/<?php echo rawurlencode(basename($anhCu)); ?>"
+                            alt="Ảnh sản phẩm hiện tại"
+                            style="width: 140px; height: 140px; object-fit: contain; border: 1px solid #ddd; border-radius: 8px; padding: 8px;">
+                    </div>
                     <?php } else { ?>
-                        <p class="text-muted">
-                            Sản phẩm chưa có ảnh.
-                        </p>
+                    <p class="text-muted">
+                        Sản phẩm chưa có ảnh.
+                    </p>
                     <?php } ?>
 
                     <label for="hinh_anh" class="form-label">
                         Chọn ảnh mới (không bắt buộc)
                     </label>
 
-                    <input
-                        type="file"
-                        id="hinh_anh"
-                        name="hinh_anh"
-                        class="form-control"
-                        accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp"
-                    >
+                    <input type="file" id="hinh_anh" name="hinh_anh" class="form-control"
+                        accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp">
 
                     <div class="form-text">
                         Chấp nhận JPG, PNG, WEBP; tối đa 3 MB.
@@ -430,8 +374,7 @@
                 </div>
 
                 <div class="admin-create-actions">
-                    <a href="products.php"
-                       class="btn btn-outline-secondary">
+                    <a href="products.php" class="btn btn-outline-secondary">
                         Quay lại
                     </a>
 
@@ -447,4 +390,5 @@
     </div>
 
 </body>
+
 </html>

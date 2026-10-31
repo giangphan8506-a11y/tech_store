@@ -1,4 +1,3 @@
-
 <?php
     if (session_status() === PHP_SESSION_NONE) {
         session_start();
@@ -223,11 +222,11 @@
 <h2 class="section-title">Thanh toán đơn hàng</h2>
 
 <?php if (!empty($loi)) { ?>
-    <div class="checkout-errors">
-        <?php foreach ($loi as $thongBaoLoi) { ?>
-            <p><?php echo htmlspecialchars($thongBaoLoi); ?></p>
-        <?php } ?>
-    </div>
+<div class="checkout-errors">
+    <?php foreach ($loi as $thongBaoLoi) { ?>
+    <p><?php echo htmlspecialchars($thongBaoLoi); ?></p>
+    <?php } ?>
+</div>
 <?php } ?>
 
 <div class="checkout-layout">
@@ -238,10 +237,8 @@
 
         <div class="checkout-product-info">
             <?php if (!empty($sanPham['HinhAnh'])) { ?>
-                <img
-                    src="assets/images/<?php echo rawurlencode(basename($sanPham['HinhAnh'])); ?>"
-                    alt="<?php echo htmlspecialchars($sanPham['TenSanPham']); ?>"
-                >
+            <img src="/tech_store/assets/images/products/<?php echo rawurlencode(basename($sanPham['HinhAnh'])); ?>"
+                alt="<?php echo htmlspecialchars($sanPham['TenSanPham']); ?>">
             <?php } ?>
 
             <div>
@@ -268,77 +265,43 @@
     <section class="checkout-form-container">
         <h3>Thông tin giao hàng</h3>
 
-        <form method="POST" action="checkout.php?id=<?php echo (int) $maSanPham; ?>&so_luong=<?php echo (int) $soLuong; ?>">
+        <form method="POST"
+            action="checkout.php?id=<?php echo (int) $maSanPham; ?>&so_luong=<?php echo (int) $soLuong; ?>">
 
-            <input
-                type="hidden"
-                name="id"
-                value="<?php echo (int) $maSanPham; ?>"
-            >
+            <input type="hidden" name="id" value="<?php echo (int) $maSanPham; ?>">
 
-            <input
-                type="hidden"
-                name="so_luong"
-                value="<?php echo (int) $soLuong; ?>"
-            >
+            <input type="hidden" name="so_luong" value="<?php echo (int) $soLuong; ?>">
 
             <div class="form-group">
                 <label for="ten_nguoi_nhan">Họ tên người nhận</label>
-                <input
-                    type="text"
-                    id="ten_nguoi_nhan"
-                    name="ten_nguoi_nhan"
-                    maxlength="100"
-                    value="<?php echo htmlspecialchars($tenNguoiNhan); ?>"
-                    required
-                >
+                <input type="text" id="ten_nguoi_nhan" name="ten_nguoi_nhan" maxlength="100"
+                    value="<?php echo htmlspecialchars($tenNguoiNhan); ?>" required>
             </div>
 
             <div class="form-group">
                 <label for="so_dien_thoai">Số điện thoại</label>
-                <input
-                    type="tel"
-                    id="so_dien_thoai"
-                    name="so_dien_thoai"
-                    maxlength="11"
-                    value="<?php echo htmlspecialchars($soDienThoai); ?>"
-                    required
-                >
+                <input type="tel" id="so_dien_thoai" name="so_dien_thoai" maxlength="11"
+                    value="<?php echo htmlspecialchars($soDienThoai); ?>" required>
             </div>
 
             <div class="form-group">
                 <label for="dia_chi">Địa chỉ giao hàng</label>
-                <textarea
-                    id="dia_chi"
-                    name="dia_chi"
-                    rows="3"
-                    maxlength="255"
-                    required
-                ><?php echo htmlspecialchars($diaChi); ?></textarea>
+                <textarea id="dia_chi" name="dia_chi" rows="3" maxlength="255"
+                    required><?php echo htmlspecialchars($diaChi); ?></textarea>
             </div>
 
             <div class="form-group">
                 <label for="ghi_chu">Ghi chú (không bắt buộc)</label>
-                <textarea
-                    id="ghi_chu"
-                    name="ghi_chu"
-                    rows="3"
-                    maxlength="1000"
-                ><?php echo htmlspecialchars($ghiChu); ?></textarea>
+                <textarea id="ghi_chu" name="ghi_chu" rows="3"
+                    maxlength="1000"><?php echo htmlspecialchars($ghiChu); ?></textarea>
             </div>
 
-            <button
-                type="submit"
-                class="btn-primary checkout-submit"
-                <?php echo ((int) $sanPham['SoLuongTon'] < $soLuong) ? 'disabled' : ''; ?>
-            >
+            <button type="submit" class="btn-primary checkout-submit"
+                <?php echo ((int) $sanPham['SoLuongTon'] < $soLuong) ? 'disabled' : ''; ?>>
                 Xác nhận đặt hàng
             </button>
 
-            <a
-                href="product-detail.php?id=<?php echo (int) $maSanPham; ?>"
-                class="back-to-products"
-            >
+            <a href="product-detail.php?id=<?php echo (int) $maSanPham; ?>" class="back-to-products">
                 Quay lại sản phẩm
             </a>
         </form>

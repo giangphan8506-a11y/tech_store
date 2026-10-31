@@ -1,4 +1,3 @@
-
 <?php
     if (session_status() === PHP_SESSION_NONE) {
         session_start();
@@ -70,21 +69,16 @@
 
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title><?php echo htmlspecialchars($pageTitle); ?></title>
 
-    <link
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-        rel="stylesheet"
-    >
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <link
-        rel="stylesheet"
-        href="<?php echo $baseUrl; ?>/assets/css/style.css"
-    >
+    <link rel="stylesheet" href="<?php echo $baseUrl; ?>/assets/css/style.css">
 </head>
 
 <body class="admin-products-page">
@@ -103,34 +97,25 @@
         </div>
 
         <?php if (isset($thongBao[$ketQua])) { ?>
-            <div class="alert alert-<?php echo $loaiThongBao; ?>" role="alert">
-                <?php echo htmlspecialchars($thongBao[$ketQua]); ?>
-            </div>
+        <div class="alert alert-<?php echo $loaiThongBao; ?>" role="alert">
+            <?php echo htmlspecialchars($thongBao[$ketQua]); ?>
+        </div>
         <?php } ?>
 
         <div class="admin-products-toolbar">
 
-            <form
-                action="products.php"
-                method="GET"
-                class="admin-products-search"
-            >
-                <input
-                    type="text"
-                    name="q"
-                    class="form-control"
-                    placeholder="Nhập tên sản phẩm cần tìm..."
-                    value="<?php echo htmlspecialchars($tuKhoa); ?>"
-                >
+            <form action="products.php" method="GET" class="admin-products-search">
+                <input type="text" name="q" class="form-control" placeholder="Nhập tên sản phẩm cần tìm..."
+                    value="<?php echo htmlspecialchars($tuKhoa); ?>">
 
                 <button type="submit" class="btn btn-primary">
                     Tìm kiếm
                 </button>
 
                 <?php if ($tuKhoa !== '') { ?>
-                    <a href="products.php" class="btn btn-outline-secondary">
-                        Xóa tìm kiếm
-                    </a>
+                <a href="products.php" class="btn btn-outline-secondary">
+                    Xóa tìm kiếm
+                </a>
                 <?php } ?>
             </form>
 
@@ -165,58 +150,45 @@
 
                     <?php if (count($danhSachSanPham) > 0) { ?>
 
-                        <?php foreach ($danhSachSanPham as $sanPham) { ?>
+                    <?php foreach ($danhSachSanPham as $sanPham) { ?>
 
-                            <tr>
-                                <td>
-                                    <?php echo (int) $sanPham['MaSanPham']; ?>
-                                </td>
+                    <tr>
+                        <td>
+                            <?php echo (int) $sanPham['MaSanPham']; ?>
+                        </td>
 
-                                <td>
-                                    <div class="admin-product-image">
-                                        <?php if (!empty($sanPham['HinhAnh'])) { ?>
-                                            <img
-                                                src="<?php
-                                                    echo $baseUrl;
-                                                ?>/assets/images/<?php
-                                                    echo rawurlencode(
-                                                        basename($sanPham['HinhAnh'])
-                                                    );
-                                                ?>"
-                                                alt="<?php
-                                                    echo htmlspecialchars(
-                                                        $sanPham['TenSanPham']
-                                                    );
-                                                ?>"
-                                                loading="lazy"
-                                            >
-                                        <?php } else { ?>
-                                            <span>Chưa có ảnh</span>
-                                        <?php } ?>
-                                    </div>
-                                </td>
+                        <td>
+                            <div class="admin-product-image">
+                                <?php if (!empty($sanPham['HinhAnh'])) { ?>
+                                <img src="../assets/images/products/<?php echo rawurlencode(basename($sanPham['HinhAnh'])); ?>"
+                                    alt="<?php echo htmlspecialchars($sanPham['TenSanPham']); ?>">
+                                <?php } else { ?>
+                                <span>Chưa có ảnh</span>
+                                <?php } ?>
+                            </div>
+                        </td>
 
-                                <td>
-                                    <strong>
-                                        <?php
+                        <td>
+                            <strong>
+                                <?php
                                             echo htmlspecialchars(
                                                 $sanPham['TenSanPham']
                                             );
                                         ?>
-                                    </strong>
-                                </td>
+                            </strong>
+                        </td>
 
-                                <td>
-                                    <?php
+                        <td>
+                            <?php
                                         echo htmlspecialchars(
                                             $sanPham['TenDanhMuc']
                                             ?? 'Chưa phân loại'
                                         );
                                     ?>
-                                </td>
+                        </td>
 
-                                <td class="text-end">
-                                    <?php
+                        <td class="text-end">
+                            <?php
                                         echo number_format(
                                             (float) $sanPham['DonGia'],
                                             0,
@@ -224,58 +196,45 @@
                                             '.'
                                         );
                                     ?>đ
-                                </td>
+                        </td>
 
-                                <td class="text-center">
-                                    <?php echo (int) $sanPham['SoLuongTon']; ?>
-                                </td>
+                        <td class="text-center">
+                            <?php echo (int) $sanPham['SoLuongTon']; ?>
+                        </td>
 
-                                <td>
-                                    <div class="admin-product-actions d-flex gap-2">
+                        <td>
+                            <div class="admin-product-actions d-flex gap-2">
 
-                                        <a
-                                            href="product-edit.php?id=<?php
+                                <a href="product-edit.php?id=<?php
                                                 echo (int) $sanPham['MaSanPham'];
-                                            ?>"
-                                            class="btn btn-sm btn-warning"
-                                        >
-                                            Sửa
-                                        </a>
+                                            ?>" class="btn btn-sm btn-warning">
+                                    Sửa
+                                </a>
 
-                                        <form
-                                            action="product-delete.php"
-                                            method="POST"
-                                            onsubmit="return confirm('Bạn có chắc muốn xóa sản phẩm này không?');"
-                                        >
-                                            <input
-                                                type="hidden"
-                                                name="ma_san_pham"
-                                                value="<?php
+                                <form action="product-delete.php" method="POST"
+                                    onsubmit="return confirm('Bạn có chắc muốn xóa sản phẩm này không?');">
+                                    <input type="hidden" name="ma_san_pham" value="<?php
                                                     echo (int) $sanPham['MaSanPham'];
-                                                ?>"
-                                            >
+                                                ?>">
 
-                                            <button
-                                                type="submit"
-                                                class="btn btn-sm btn-danger"
-                                            >
-                                                Xóa
-                                            </button>
-                                        </form>
+                                    <button type="submit" class="btn btn-sm btn-danger">
+                                        Xóa
+                                    </button>
+                                </form>
 
-                                    </div>
-                                </td>
-                            </tr>
+                            </div>
+                        </td>
+                    </tr>
 
-                        <?php } ?>
+                    <?php } ?>
 
                     <?php } else { ?>
 
-                        <tr>
-                            <td colspan="7" class="text-center py-4">
-                                Không tìm thấy sản phẩm nào.
-                            </td>
-                        </tr>
+                    <tr>
+                        <td colspan="7" class="text-center py-4">
+                            Không tìm thấy sản phẩm nào.
+                        </td>
+                    </tr>
 
                     <?php } ?>
 
@@ -286,4 +245,5 @@
     </div>
 
 </body>
+
 </html>

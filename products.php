@@ -1,12 +1,13 @@
 <?php
     require_once __DIR__ . '/config/database.php';
-
+    //__dir__ tương ứng với thư mục: C:\xampp\htdocs\tech_store
     $pageTitle = 'Sản phẩm - Tech Store';
 
     // Lay tu khoa tim kiem
     $tuKhoa = trim($_GET['q'] ?? '');
-
-    // Lay ma danh muc
+    // Toán tử ?? được gọi là toán tử null coalescing. Nó có nghĩa là: nếu giá trị bên trái tồn tại và khác null, sử dụng giá trị đó; nếu không, sử dụng giá trị bên phải.
+   
+    // Lay ma danh muc và đọc dữ liệu đầu vào và có thể kiểm tra dữ liệu đó theo bộ lọc được chỉ định.
     $maDanhMuc = filter_input(INPUT_GET, 'danh_muc', FILTER_VALIDATE_INT);
 
     if (!$maDanhMuc || $maDanhMuc < 1) {
@@ -29,7 +30,7 @@
 
     $thamSo = [];
 
-    if ($tuKhoa !== '') {
+    if ($tuKhoa !== '') { //!!== so sánh cả kiểu dữ liệu
         $sql .= " AND SanPham.TenSanPham LIKE :tuKhoa";
         $thamSo[':tuKhoa'] = '%' . $tuKhoa . '%';
     }
@@ -64,7 +65,7 @@
 
     // Phan trang
     $sanPhamMoiTrang = 12;
-    $tongTrang = max(1, (int) ceil($tongSanPham / $sanPhamMoiTrang));
+    $tongTrang = max(1, (int) ceil($tongSanPham / $sanPhamMoiTrang)); // ceil làm tròn tới số nguyên tiếp theo 2.08 -> 3
 
     $trangHienTai = filter_input(INPUT_GET, 'trang', FILTER_VALIDATE_INT);
 
@@ -72,8 +73,8 @@
         $trangHienTai = 1;
     }
 
-    $trangHienTai = min($trangHienTai, $tongTrang);
-    $viTriBatDau = ($trangHienTai - 1) * $sanPhamMoiTrang;
+    $trangHienTai = min($trangHienTai, $tongTrang); // ràng buộc k cho chỉnh lên thnah url
+    $viTriBatDau = ($trangHienTai - 1) * $sanPhamMoiTrang; //trang 1 offset bắt đầu từ 0 trang 1 từ 12 để ko lấy trùng sản phẩm
 
     $sql .= "
         ORDER BY SanPham.NgayTao DESC, SanPham.MaSanPham DESC
